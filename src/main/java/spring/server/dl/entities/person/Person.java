@@ -1,10 +1,8 @@
 package spring.server.dl.entities.person;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 import spring.server.dl.entities.BaseEntity;
 import spring.server.dl.enums.Roles;
 
@@ -13,6 +11,7 @@ import java.util.UUID;
 @MappedSuperclass
 @Getter @Setter
 @NoArgsConstructor
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @EqualsAndHashCode(callSuper = true) @ToString(callSuper = true)
 public abstract class Person extends BaseEntity {
 
@@ -29,6 +28,9 @@ public abstract class Person extends BaseEntity {
     @Column(unique = true)
     private String email;
 
+    @Column(unique = true, length = 15)
+    private String phoneNumber;
+
     @Column()
     @Setter(AccessLevel.NONE)
     private String password;
@@ -38,14 +40,5 @@ public abstract class Person extends BaseEntity {
         this.firstName = firstName;
         this.lastName = lastName;
         this.role = role;
-    }
-
-    public Person(UUID id, String firstName, String lastName, Roles role, String email, String password) {
-        super(id);
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.role = role;
-        this.email = email;
-        this.password = password;
     }
 }
