@@ -7,6 +7,7 @@ import spring.server.dl.entities.person.Professional;
 import spring.server.dl.enums.StatusPrescription;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -38,6 +39,9 @@ public class Prescriptions extends BaseEntity{
 
     @ManyToOne
     private Professional professional;
+
+    @OneToMany(mappedBy = "prescriptions")
+    private Set<PrescriptionMedicament> prescriptionMedicament = new HashSet<>();
 
     public Prescriptions(UUID id, LocalDate prescription_date, LocalDate expiration_date, String motif, String special_instructions, StatusPrescription statut) {
         super(id);
