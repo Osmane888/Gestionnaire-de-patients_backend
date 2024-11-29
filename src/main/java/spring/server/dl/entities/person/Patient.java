@@ -3,6 +3,8 @@ package spring.server.dl.entities.person;
 import jakarta.persistence.*;
 import lombok.*;
 import spring.server.dl.entities.Address;
+import spring.server.dl.entities.Certificat;
+import spring.server.dl.entities.Consultation;
 
 import java.time.LocalDate;
 
@@ -26,8 +28,4 @@ public class Patient extends Person{
 
     @ManyToOne
     private Address address;
-
-    @ManyToOne
-    private Professional professional;
-
 }

@@ -3,16 +3,15 @@ package spring.server.dl.entities;
 import jakarta.persistence.*;
 import lombok.*;
 import spring.server.dl.entities.person.Patient;
+import spring.server.dl.entities.person.Professional;
+
+import java.util.UUID;
 
 @Entity
 @Getter @Setter
-@NoArgsConstructor @AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode @ToString
-public class Document {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class Document extends BaseEntity{
 
     @Column(nullable = false, length = 50)
     private String documentName;
@@ -27,5 +26,14 @@ public class Document {
     private String documentUrl;
 
     @ManyToOne
-    private Patient patient;
+    private Professional professional;
+
+    public Document(UUID id, String documentName, String documentType, int documentSize, String documentUrl, Professional professional) {
+        super(id);
+        this.documentName = documentName;
+        this.documentType = documentType;
+        this.documentSize = documentSize;
+        this.documentUrl = documentUrl;
+        this.professional = professional;
+    }
 }

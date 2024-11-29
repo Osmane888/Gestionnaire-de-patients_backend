@@ -41,4 +41,14 @@ public abstract class Person extends BaseEntity {
         this.lastName = lastName;
         this.role = role;
     }
+
+    public Person(UUID id, String firstName, String lastName, Roles role, String email, String phoneNumber, String password) {
+        super(id);
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.role = role;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.password = password;
+    }
 }

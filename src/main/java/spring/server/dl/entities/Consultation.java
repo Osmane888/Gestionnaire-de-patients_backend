@@ -10,16 +10,13 @@ import spring.server.dl.enums.StatusRdv;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.UUID;
 
 @Entity
 @NoArgsConstructor
 @Getter @Setter
 @EqualsAndHashCode @ToString
-public class Consultation {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class Consultation extends BaseEntity{
 
     @Column(nullable = false)
     private LocalDate dateRdv;
@@ -44,7 +41,7 @@ public class Consultation {
     private int annulationDelay;
 
     @ManyToOne
-    private Address addresses;
+    private Address address;
 
     @ManyToOne
     private Patient patient;
@@ -54,4 +51,24 @@ public class Consultation {
 
     @ManyToOne
     private Facture facture;
+
+    @ManyToOne
+    private Certificat certificat;
+
+
+    public Consultation(UUID id, LocalDate dateRdv, Timestamp hourRdv, LocalTime durationRdv, StatusRdv statusRdv, String rdvType, String consigne, int annulationDelay, Address address, Patient patient, Professional professional, Facture facture, Certificat certificat) {
+        super(id);
+        this.dateRdv = dateRdv;
+        this.hourRdv = hourRdv;
+        this.durationRdv = durationRdv;
+        this.statusRdv = statusRdv;
+        this.rdvType = rdvType;
+        this.consigne = consigne;
+        this.annulationDelay = annulationDelay;
+        this.address = address;
+        this.patient = patient;
+        this.professional = professional;
+        this.facture = facture;
+        this.certificat = certificat;
+    }
 }

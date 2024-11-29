@@ -12,14 +12,17 @@ import java.util.UUID;
 @Getter @Setter
 @EqualsAndHashCode @ToString
 @NoArgsConstructor
-public class Facture {
-
-    @Id
-    private UUID id;
+public class Facture extends BaseEntity{
 
     @Column(nullable = false)
     private Double amount;
 
     @Column(nullable = false)
     private LocalDateTime generationDate;
+
+    public Facture(UUID id, Double amount, LocalDateTime generationDate) {
+        super(id);
+        this.amount = amount;
+        this.generationDate = generationDate;
+    }
 }
