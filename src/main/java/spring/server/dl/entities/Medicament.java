@@ -15,8 +15,12 @@ import java.util.UUID;
 @EqualsAndHashCode @ToString
 public class Medicament extends BaseEntity {
 
+    /*
+    ENTITES MISE DE COTE POUR L'INSTANT
+     */
     @Column(nullable = false)
     private String name;
+
 
     @Column(nullable = false)
     private String posologie;

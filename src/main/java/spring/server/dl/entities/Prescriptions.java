@@ -18,6 +18,10 @@ import java.util.UUID;
 @EqualsAndHashCode @ToString
 public class Prescriptions extends BaseEntity{
 
+    /*
+    ENTITES MISE DE COTE POUR L'INSTANT
+     */
+
     @Column(nullable = false)
     private LocalDate prescription_date;
 

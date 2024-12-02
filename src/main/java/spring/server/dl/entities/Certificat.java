@@ -19,6 +19,10 @@ import java.util.UUID;
 @EqualsAndHashCode(callSuper = true) @ToString
 public class Certificat extends BaseEntity {
 
+    /*
+    ENTITES MISE DE COTE POUR L'INSTANT
+     */
+
     @Column(nullable = false)
     private LocalDate dateArret;
 

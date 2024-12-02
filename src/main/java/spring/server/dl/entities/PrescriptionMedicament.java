@@ -11,6 +11,10 @@ import java.util.UUID;
 @EqualsAndHashCode @ToString
 public class PrescriptionMedicament {
 
+    /*
+    ENTITES MISE DE COTE POUR L'INSTANT
+     */
+
     @EmbeddedId
     private PrescriptionMedicamentId id;
 
