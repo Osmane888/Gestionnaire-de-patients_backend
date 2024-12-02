@@ -8,7 +8,6 @@ import spring.server.dl.enums.Roles;
 
 import java.util.UUID;
 
-@MappedSuperclass
 @Getter @Setter
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
