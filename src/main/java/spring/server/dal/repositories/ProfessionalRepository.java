@@ -6,4 +6,5 @@ import spring.server.dl.entities.person.Professional;
 import java.util.UUID;
 
 public interface ProfessionalRepository extends JpaRepository<Professional, UUID> {
+
 }
