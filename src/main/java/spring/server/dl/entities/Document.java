@@ -26,14 +26,14 @@ public class Document extends BaseEntity{
     private String documentUrl;
 
     @ManyToOne
-    private Professional professional;
+    private Patient patient;
 
-    public Document(UUID id, String documentName, String documentType, int documentSize, String documentUrl, Professional professional) {
+    public Document(UUID id, String documentName, String documentType, int documentSize, String documentUrl, Patient patient) {
         super(id);
         this.documentName = documentName;
         this.documentType = documentType;
         this.documentSize = documentSize;
         this.documentUrl = documentUrl;
-        this.professional = professional;
+        this.patient = patient;
     }
 }

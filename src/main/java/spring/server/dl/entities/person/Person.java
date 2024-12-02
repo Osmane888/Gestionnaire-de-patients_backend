@@ -9,6 +9,7 @@ import spring.server.dl.enums.Roles;
 import java.util.UUID;
 
 @Getter @Setter
+@Entity
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @EqualsAndHashCode(callSuper = true) @ToString(callSuper = true)
