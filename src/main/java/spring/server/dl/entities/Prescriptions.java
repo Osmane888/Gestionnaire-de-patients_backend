@@ -15,7 +15,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-@EqualsAndHashCode @ToString
+@EqualsAndHashCode(callSuper = true) @ToString
 public class Prescriptions extends BaseEntity{
 
     /*

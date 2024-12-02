@@ -10,7 +10,7 @@ import java.util.UUID;
 @Entity
 @Getter @Setter
 @NoArgsConstructor
-@EqualsAndHashCode @ToString
+@EqualsAndHashCode(callSuper = true) @ToString
 public class Document extends BaseEntity{
 
     @Column(nullable = false, length = 50)

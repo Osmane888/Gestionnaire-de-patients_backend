@@ -15,7 +15,7 @@ import java.util.UUID;
 @Entity
 @NoArgsConstructor
 @Getter @Setter
-@EqualsAndHashCode @ToString
+@EqualsAndHashCode(callSuper = true) @ToString
 public class Consultation extends BaseEntity{
 
     @Column(nullable = false)

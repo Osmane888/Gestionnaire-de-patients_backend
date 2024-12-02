@@ -12,7 +12,7 @@ import java.util.UUID;
 @Entity
 @NoArgsConstructor
 @Getter
-@EqualsAndHashCode @ToString
+@EqualsAndHashCode(callSuper = true) @ToString
 public class Medicament extends BaseEntity {
 
     /*

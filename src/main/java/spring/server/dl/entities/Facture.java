@@ -10,7 +10,7 @@ import java.util.UUID;
 
 @Entity
 @Getter @Setter
-@EqualsAndHashCode @ToString
+@EqualsAndHashCode(callSuper = true) @ToString
 @NoArgsConstructor
 public class Facture extends BaseEntity{
 
