@@ -1,5 +1,6 @@
 package spring.server.dl.entities.person;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.*;
 import spring.server.dl.entities.Address;
@@ -19,7 +20,7 @@ import java.util.UUID;
 public class Professional extends Person{
 
     @Getter
-    @Column(unique = true, nullable = false)
+    @Column(unique = true)
     private String licenseNumber;
 
     @Getter
@@ -27,13 +28,22 @@ public class Professional extends Person{
     private boolean valid;
 
     @Getter
+    @Column()
+    @Enumerated(EnumType.STRING)
+    private Roles role;
+
+    @Getter
     @Column(nullable = false, length = 120)
     private String specialization;
 
-    public Professional(UUID id, String firstName, String lastName, Roles role, String email, String phoneNumber, String password, String licenseNumber, boolean valid, String specialization) {
-        super(id, firstName, lastName, role, email, phoneNumber, password);
+    @Column(nullable = false)
+    private String password;
+
+    public Professional(String licenseNumber, boolean valid, Roles role, String specialization, String password) {
         this.licenseNumber = licenseNumber;
         this.valid = valid;
+        this.role = role;
         this.specialization = specialization;
+        this.password = password;
     }
 }

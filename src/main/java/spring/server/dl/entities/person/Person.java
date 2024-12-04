@@ -21,34 +21,24 @@ public abstract class Person extends BaseEntity {
     @Column(nullable = false, length = 200)
     private String lastName;
 
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private Roles role;
-
     @Column(unique = true)
     private String email;
 
     @Column(unique = true, length = 15)
     private String phoneNumber;
 
-    @Column()
-    @Setter(AccessLevel.NONE)
-    private String password;
 
-    public Person(UUID id, String firstName, String lastName, Roles role) {
+    public Person(UUID id, String firstName, String lastName) {
         super(id);
         this.firstName = firstName;
         this.lastName = lastName;
-        this.role = role;
     }
 
-    public Person(UUID id, String firstName, String lastName, Roles role, String email, String phoneNumber, String password) {
+    public Person(UUID id, String firstName, String lastName, String email, String phoneNumber) {
         super(id);
         this.firstName = firstName;
         this.lastName = lastName;
-        this.role = role;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.password = password;
     }
 }
