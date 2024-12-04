@@ -28,4 +28,6 @@ public class Patient extends Person{
 
     @ManyToOne
     private Address address;
+
+
 }
