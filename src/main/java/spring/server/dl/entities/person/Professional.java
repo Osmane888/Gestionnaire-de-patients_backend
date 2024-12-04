@@ -39,8 +39,7 @@ public class Professional extends Person{
     @Column(nullable = false)
     private String password;
 
-    public Professional(UUID id, String firstName, String lastName, String email, String phoneNumber, String licenseNumber, boolean valid, Roles role, String specialization, String password) {
-        super(id, firstName, lastName, email, phoneNumber);
+    public Professional(String licenseNumber, boolean valid, Roles role, String specialization, String password) {
         this.licenseNumber = licenseNumber;
         this.valid = valid;
         this.role = role;

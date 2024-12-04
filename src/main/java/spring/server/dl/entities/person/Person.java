@@ -27,6 +27,7 @@ public abstract class Person extends BaseEntity {
     @Column(unique = true, length = 15)
     private String phoneNumber;
 
+
     public Person(UUID id, String firstName, String lastName) {
         super(id);
         this.firstName = firstName;
