@@ -1,5 +1,6 @@
 package spring.server.dl.entities.person;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.*;
 import spring.server.dl.entities.Address;
@@ -28,17 +29,22 @@ public class Professional extends Person{
 
     @Getter
     @Column()
+    @Enumerated(EnumType.STRING)
     private Roles role;
 
     @Getter
     @Column(nullable = false, length = 120)
     private String specialization;
 
-    public Professional(UUID id, String firstName, String lastName, String email, String phoneNumber, String password, String licenseNumber, boolean valid, Roles role, String specialization) {
-        super(id, firstName, lastName, email, phoneNumber, password);
+    @Column(nullable = false)
+    private String password;
+
+    public Professional(UUID id, String firstName, String lastName, String email, String phoneNumber, String licenseNumber, boolean valid, Roles role, String specialization, String password) {
+        super(id, firstName, lastName, email, phoneNumber);
         this.licenseNumber = licenseNumber;
         this.valid = valid;
         this.role = role;
         this.specialization = specialization;
+        this.password = password;
     }
 }
