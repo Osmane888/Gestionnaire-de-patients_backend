@@ -8,9 +8,7 @@ import spring.server.dl.entities.Consultation;
 import spring.server.dl.entities.Prescriptions;
 import spring.server.dl.enums.Roles;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @NoArgsConstructor
@@ -34,11 +32,23 @@ public class Professional extends Person{
     @Column(nullable = false, length = 120)
     private String specialization;
 
-    public Professional(UUID id, String firstName, String lastName, String email, String phoneNumber, String password, String licenseNumber, boolean valid, Roles role, String specialization) {
-        super(id, firstName, lastName, email, phoneNumber, password);
+    @Getter
+    @Column(nullable = false)
+    private String password;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Address> addresses = new HashSet<>();
+
+    public Professional(UUID id, String firstName, String lastName, String email, String phoneNumber, String licenseNumber, boolean valid, Roles role, String specialization, String password) {
+        super(id, firstName, lastName, email, phoneNumber);
         this.licenseNumber = licenseNumber;
         this.valid = valid;
         this.role = role;
         this.specialization = specialization;
+        this.password = password;
+    }
+
+    public Set<Address> getAddresses() {
+        return Set.copyOf(addresses);
     }
 }

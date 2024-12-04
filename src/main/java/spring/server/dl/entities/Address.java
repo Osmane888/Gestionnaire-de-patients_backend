@@ -2,6 +2,7 @@ package spring.server.dl.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.boot.autoconfigure.web.WebProperties;
 import spring.server.dl.entities.person.Patient;
 import spring.server.dl.entities.person.Professional;
 
@@ -12,8 +13,8 @@ import java.util.UUID;
 @Entity
 @NoArgsConstructor
 @Getter @Setter
-@EqualsAndHashCode(callSuper = true) @ToString
-public class Address extends BaseEntity{
+@EqualsAndHashCode @ToString
+public class Address{
 
     @Column(nullable = false, length = 250)
     private String street;
@@ -33,11 +34,11 @@ public class Address extends BaseEntity{
     @ManyToOne(fetch = FetchType.EAGER)
     private Consultation consultation;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Professional> professionals = new HashSet<>();
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    public Address(UUID id, String street, String city, String number, String zipCode) {
-        super(id);
+    public Address(String street, String city, String number, String zipCode) {
         this.street = street;
         this.city = city;
         this.number = number;

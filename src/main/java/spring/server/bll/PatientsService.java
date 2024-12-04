@@ -11,8 +11,6 @@ public interface PatientsService {
 
     Patient findPatientById(UUID id);
 
-    Patient findPatientByEmail(String email);
-
     Patient findPatientByLastNameAndFirstName(String lastName, String firstName);
 
     Patient createPatient(Patient patient);

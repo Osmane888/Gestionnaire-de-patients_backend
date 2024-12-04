@@ -23,28 +23,30 @@ public class PatientsServiceImpl implements PatientsService {
 
     @Override
     public Patient findPatientById(UUID id) {
-        Patient patient = patientRepository.findById(id).orElse(null);
-        return patient;
-    }
-
-    @Override
-    public Patient findPatientByEmail(String email) {
-        return null;
+        return patientRepository.findById(id).orElseThrow();
     }
 
     @Override
     public Patient findPatientByLastNameAndFirstName(String lastName, String firstName) {
-        return null;
+        return patientRepository.findByAppelation(lastName,firstName).orElseThrow();
     }
 
     @Override
     public Patient createPatient(Patient patient) {
-        return null;
+        if(patientRepository.existsByAppelation(patient.getFirstName(), patient.getLastName())) {
+            throw new IllegalArgumentException("Le patient existe déjà");
+        }
+        patient.setId(UUID.randomUUID());
+        return patientRepository.save(patient);
     }
 
     @Override
     public Patient updatePatient(Patient patient) {
-        return null;
+        Patient patientExisting = findPatientById(patient.getId());
+
+        patientExisting.setFirstName(patient.getFirstName());
+        patientExisting.setLastName(patient.getLastName());
+        return patientRepository.save(patientExisting);
     }
 
     @Override
