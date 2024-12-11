@@ -5,9 +5,11 @@ import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
 import org.springframework.stereotype.Component;
+import spring.server.dl.entities.person.Professional;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
+import java.util.Date;
 
 @Component
 public class JwtUtils {
@@ -23,6 +25,18 @@ public class JwtUtils {
         this.builder = Jwts.builder().signWith(secretKey);
         this.parser = Jwts.parserBuilder().setSigningKey(secretKey).build();
     }
+
+    public String generateToken(Professional professional){
+        return this.builder
+                .setSubject(professional.getUsername())
+                .claim("id", professional.getId())
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME * 1000))
+                .compact();
+    }
+
+
+
 
     private Claims parseToken(String token){
         return this.parser.parseClaimsJws(token).getBody();
