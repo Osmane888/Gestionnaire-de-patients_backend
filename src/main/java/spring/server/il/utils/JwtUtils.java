@@ -10,6 +10,7 @@ import spring.server.dl.entities.person.Professional;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.util.Date;
+import java.util.UUID;
 
 @Component
 public class JwtUtils {
@@ -35,10 +36,22 @@ public class JwtUtils {
                 .compact();
     }
 
-
-
-
     private Claims parseToken(String token){
         return this.parser.parseClaimsJws(token).getBody();
+    }
+
+    public String getUsername(String token){
+        return parseToken(token).getSubject();
+    }
+
+    public UUID getUserId(String token){
+        return parseToken(token).get("id", UUID.class);
+    }
+
+    public boolean isValid(String token){
+        Claims claims = parseToken(token);
+        Date now = new Date();
+
+        return now.after(claims.getIssuedAt()) && now.before(claims.getExpiration());
     }
 }
