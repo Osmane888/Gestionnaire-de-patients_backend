@@ -1,4 +1,4 @@
-package spring.server.api.models.dtos;
+package spring.server.api.models.dtos.patientDTO;
 
 import spring.server.dl.entities.Address;
 import spring.server.dl.entities.person.Patient;
@@ -6,7 +6,7 @@ import spring.server.dl.entities.person.Patient;
 import java.time.LocalDate;
 import java.util.UUID;
 
-public record PatientDTO(
+public record TotalInfosDTO(
         UUID id,
         String lastname,
         String firstname,
@@ -18,8 +18,8 @@ public record PatientDTO(
         Address address
 ) {
 
-    public static PatientDTO fromPatient(Patient patient) {
-        return new PatientDTO(
+    public static TotalInfosDTO fromPatientTotalInfos(Patient patient) {
+        return new TotalInfosDTO(
                 patient.getId(),
                 patient.getLastName(),
                 patient.getFirstName(),

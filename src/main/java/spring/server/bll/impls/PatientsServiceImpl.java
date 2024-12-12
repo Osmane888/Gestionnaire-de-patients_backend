@@ -2,6 +2,7 @@ package spring.server.bll.impls;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import spring.server.api.models.dtos.patientDTO.TotalInfosDTO;
 import spring.server.bll.PatientsService;
 import spring.server.dal.repositories.PatientRepository;
 import spring.server.dl.entities.person.Patient;
@@ -23,8 +24,9 @@ public class PatientsServiceImpl implements PatientsService {
 
     @Override
     public Patient findPatientById(UUID id) {
-        return patientRepository.findById(id).orElseThrow();
+        return patientRepository.findById(id).orElse(null);
     }
+
 
     @Override
     public Patient findPatientByLastNameAndFirstName(String lastName, String firstName) {
