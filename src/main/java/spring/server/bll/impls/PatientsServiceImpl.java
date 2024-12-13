@@ -38,7 +38,8 @@ public class PatientsServiceImpl implements PatientsService {
         if(patientRepository.existsByAppelation(patient.getFirstName(), patient.getLastName())) {
             throw new IllegalArgumentException("Le patient existe déjà");
         }
-        patient.setId(UUID.randomUUID());
+
+
         return patientRepository.save(patient);
     }
 
@@ -46,8 +47,15 @@ public class PatientsServiceImpl implements PatientsService {
     public Patient updatePatient(Patient patient) {
         Patient patientExisting = findPatientById(patient.getId());
 
-        patientExisting.setFirstName(patient.getFirstName());
-        patientExisting.setLastName(patient.getLastName());
+        patient.setId(UUID.randomUUID());
+        patient.setFirstName(patient.getFirstName());
+        patient.setLastName(patient.getLastName());
+        patient.setEmail(patient.getEmail());
+        patient.setPhoneNumber(patient.getPhoneNumber());
+        patient.setBirthDate(patient.getBirthDate());
+        patient.setMutuelle(patient.getMutuelle());
+        patient.setInfo_supplement(patient.getInfo_supplement());
+        patient.setAddress(patient.getAddress());
         return patientRepository.save(patientExisting);
     }
 
