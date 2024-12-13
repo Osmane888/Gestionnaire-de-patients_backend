@@ -27,22 +27,17 @@ public abstract class Person extends BaseEntity {
     @Column(unique = true, length = 15)
     private String phoneNumber;
 
-    @Column()
-    @Setter(AccessLevel.NONE)
-    private String password;
-
     public Person(UUID id, String firstName, String lastName) {
         super(id);
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
-    public Person(UUID id, String firstName, String lastName, String email, String phoneNumber, String password) {
+    public Person(UUID id, String firstName, String lastName, String email, String phoneNumber) {
         super(id);
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.password = password;
     }
 }

@@ -12,7 +12,4 @@ import java.util.UUID;
 @EqualsAndHashCode(callSuper = true) @ToString(callSuper = true)
 public class Administrator extends Person{
 
-    public Administrator(UUID id, String firstName, String lastName,  String email, String phoneNumber, String password) {
-        super(id, firstName, lastName, email, phoneNumber, password);
-    }
 }

@@ -7,6 +7,7 @@ import spring.server.dl.entities.Certificat;
 import spring.server.dl.entities.Consultation;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Entity
 @EqualsAndHashCode(callSuper = true) @ToString(callSuper = true)
@@ -26,6 +27,29 @@ public class Patient extends Person{
     @Column(length = 500)
     private String info_supplement;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     private Address address;
+
+    public Patient(UUID id, String firstName, String lastName, LocalDate birthDate, String mutuelle, String info_supplement, Address address) {
+        super(id, firstName, lastName);
+        this.birthDate = birthDate;
+        this.mutuelle = mutuelle;
+        this.info_supplement = info_supplement;
+        this.address = address;
+    }
+
+    public Patient(UUID id, String firstName, String lastName, String email, String phoneNumber, LocalDate birthDate, String mutuelle, String info_supplement, Address address) {
+        super(id, firstName, lastName, email, phoneNumber);
+        this.birthDate = birthDate;
+        this.mutuelle = mutuelle;
+        this.info_supplement = info_supplement;
+        this.address = address;
+    }
+
+    public Patient(UUID id, String firstName, String lastName, String email, String phoneNumber, LocalDate birthDate, String mutuelle, String info_supplement) {
+        super(id, firstName, lastName, email, phoneNumber);
+        this.birthDate = birthDate;
+        this.mutuelle = mutuelle;
+        this.info_supplement = info_supplement;
+    }
 }
