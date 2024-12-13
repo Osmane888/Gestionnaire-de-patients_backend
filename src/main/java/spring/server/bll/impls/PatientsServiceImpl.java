@@ -27,7 +27,6 @@ public class PatientsServiceImpl implements PatientsService {
         return patientRepository.findById(id).orElse(null);
     }
 
-
     @Override
     public Patient findPatientByLastNameAndFirstName(String lastName, String firstName) {
         return patientRepository.findByAppelation(lastName,firstName).orElseThrow();
@@ -38,7 +37,7 @@ public class PatientsServiceImpl implements PatientsService {
         if(patientRepository.existsByAppelation(patient.getFirstName(), patient.getLastName())) {
             throw new IllegalArgumentException("Le patient existe déjà");
         }
-
+        patient.setId(UUID.randomUUID());
 
         return patientRepository.save(patient);
     }
