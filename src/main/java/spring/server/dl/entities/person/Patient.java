@@ -52,4 +52,12 @@ public class Patient extends Person{
         this.mutuelle = mutuelle;
         this.info_supplement = info_supplement;
     }
+
+    public Patient(String firstName, String lastName, String email, String phoneNumber, LocalDate birthDate, String mutuelle, String info_supplement, Address address) {
+        super(firstName, lastName, email, phoneNumber);
+        this.birthDate = birthDate;
+        this.mutuelle = mutuelle;
+        this.info_supplement = info_supplement;
+        this.address = address;
+    }
 }

@@ -1,13 +1,17 @@
 package spring.server.api.controllers;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import spring.server.api.models.dtos.patientDTO.BasicInfosDTO;
 import spring.server.api.models.dtos.patientDTO.TotalInfosDTO;
+import spring.server.api.models.forms.PatientForm;
 import spring.server.bll.PatientsService;
 import spring.server.dl.entities.person.Patient;
 
+import java.net.URI;
 import java.util.List;
 import java.util.UUID;
 
@@ -34,5 +38,17 @@ public class PatientController {
 
         TotalInfosDTO dto = TotalInfosDTO.fromPatientTotalInfos(patientsService.findPatientById(id));
         return ResponseEntity.ok(dto);
+    }
+
+    @PostMapping
+    public ResponseEntity<Void> addPatient(@Valid @RequestBody PatientForm patientForm) {
+
+        Patient patient = patientForm.toPatient();
+        Patient createdPatient = patientsService.createPatient(patient);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest().path("/{id}").buildAndExpand(createdPatient.getId()).toUri();
+
+        return ResponseEntity.created(location).build();
     }
 }
