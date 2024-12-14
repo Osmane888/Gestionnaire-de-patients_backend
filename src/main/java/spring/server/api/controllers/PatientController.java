@@ -56,5 +56,14 @@ public class PatientController {
         return ResponseEntity.created(location).build();
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> updatePatient(@PathVariable UUID id, @Valid @RequestBody PatientForm patientForm) {
+        System.out.println("Updating Patient: " + id);
+        Patient patient = patientForm.toPatient();
+        patient.setId(id);
+        patientsService.updatePatient(patient);
+        return ResponseEntity.noContent().build();
+    }
+
 
 }
