@@ -28,6 +28,10 @@ public abstract class Person extends BaseEntity {
     private String phoneNumber;
 
 
+    public Person(String email){
+        this.email = email;
+    }
+
     public Person(UUID id, String firstName, String lastName) {
         super(id);
         this.firstName = firstName;

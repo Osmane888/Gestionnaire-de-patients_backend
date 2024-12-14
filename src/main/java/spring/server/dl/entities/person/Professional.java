@@ -40,13 +40,29 @@ public class Professional extends Person implements UserDetails {
     @Column(nullable = false)
     private String password;
 
-    public Professional(String licenseNumber, boolean valid, Roles role, String specialization, String password) {
+    public Professional(UUID id, String firstName, String lastName, String email, String phoneNumber, String licenseNumber, Roles role, String specialization, String password) {
+        super(id, firstName, lastName, email, phoneNumber);
+        this.licenseNumber = licenseNumber;
+        this.role = role;
+        this.specialization = specialization;
+        this.password = password;
+    }
+
+    public Professional(UUID id, String firstName, String lastName, String email, String phoneNumber, String licenseNumber, boolean valid, Roles role, String specialization, String password) {
+        super(id, firstName, lastName, email, phoneNumber);
         this.licenseNumber = licenseNumber;
         this.valid = valid;
         this.role = role;
         this.specialization = specialization;
         this.password = password;
     }
+
+    public Professional(String email, String password){
+        super(email);
+        this.password = password;
+    }
+
+
 
 
     @Override

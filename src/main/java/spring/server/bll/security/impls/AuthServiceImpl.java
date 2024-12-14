@@ -27,40 +27,38 @@ public class AuthServiceImpl  implements AuthService {
             throw new UsernameNotFoundException("User with email " + professional.getEmail() + " already exists");
         }
 
-        String password = generatePassword(20);
-        professional.setPassword(passwordEncoder.encode(password));
+        professional.setPassword(passwordEncoder.encode(professional.getPassword()));
         professional.setId(UUID.randomUUID());
         professionalRepository.save(professional);
-
-
     }
 
     @Override
     public Professional login(Professional professional) {
-        return null;
+
+        Professional existingProfessional = professionalRepository.findByEmail(professional.getEmail()).orElseThrow();
+
+        if(!passwordEncoder.matches(professional.getPassword(), existingProfessional.getPassword())){
+            throw new RuntimeException("Wrong Password");
+        }
+        return existingProfessional;
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
-    }
-
-
-
-
-    public UserDetails loadByProfessionalMail(String email) throws UsernameNotFoundException{
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         return professionalRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException(email));
     }
 
-    private String generatePassword(int length){
-        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+[]{}|\\:;\"'<>,.?/";
-        Random random = new Random();
-        StringBuilder password = new StringBuilder();
 
-        for(int i = 0; i < length ; i++){
-        password.append(characters.charAt(random.nextInt(characters.length())));
-        }
 
-        return password.toString();
-    }
+//    private String generatePassword(int length){
+//        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+[]{}|\\:;\"'<>,.?/";
+//        Random random = new Random();
+//        StringBuilder password = new StringBuilder();
+//
+//        for(int i = 0; i < length ; i++){
+//        password.append(characters.charAt(random.nextInt(characters.length())));
+//        }
+//
+//        return password.toString();
+//    }
 }
