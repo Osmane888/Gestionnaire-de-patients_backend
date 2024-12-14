@@ -1,8 +1,6 @@
 package spring.server.dl.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -20,9 +18,15 @@ public class Facture extends BaseEntity{
     @Column(nullable = false)
     private LocalDateTime generationDate;
 
-    public Facture(UUID id, Double amount, LocalDateTime generationDate) {
+    @OneToOne
+    @JoinColumn(name = "consultation_id", referencedColumnName = "id")
+    private Consultation consultation;
+
+
+    public Facture(UUID id, Double amount, LocalDateTime generationDate, Consultation consultation) {
         super(id);
         this.amount = amount;
         this.generationDate = generationDate;
+        this.consultation = consultation;
     }
 }

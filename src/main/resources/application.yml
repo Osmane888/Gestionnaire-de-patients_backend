@@ -2,7 +2,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/gestion_patients
     username: postgres
-    password: Test1234=
+    password: 060900
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -11,5 +11,22 @@ spring:
     properties:
       hibernate:
         format_sql: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ayoubgrand060900@gmail.com
+    password: 060900
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  springfox:
+    documentation:
+      swagger-ui:
+        enabled: true
+        path: /swagger-ui/
+
 server:
-  port: 8080
+  port: 8081

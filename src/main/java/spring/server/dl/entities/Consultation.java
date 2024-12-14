@@ -49,11 +49,12 @@ public class Consultation extends BaseEntity{
     @ManyToOne
     private Professional professional;
 
-    @ManyToOne
+    @OneToOne(mappedBy = "consultation", cascade = CascadeType.ALL)
     private Facture facture;
 
     @ManyToOne
     private Certificat certificat;
+
 
 
     public Consultation(UUID id, LocalDate dateRdv, Timestamp hourRdv, LocalTime durationRdv, StatusRdv statusRdv, String rdvType, String consigne, int annulationDelay, Address address, Patient patient, Professional professional, Facture facture, Certificat certificat) {
