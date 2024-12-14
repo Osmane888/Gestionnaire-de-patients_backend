@@ -40,15 +40,21 @@ public class PatientController {
         return ResponseEntity.ok(dto);
     }
 
+
+//    Modification de postMapping par AYOUB
     @PostMapping
     public ResponseEntity<Void> addPatient(@Valid @RequestBody PatientForm patientForm) {
+        System.out.println("PatientForm: " + patientForm);
 
         Patient patient = patientForm.toPatient();
         Patient createdPatient = patientsService.createPatient(patient);
 
         URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest().path("/{id}").buildAndExpand(createdPatient.getId()).toUri();
+                .fromCurrentRequest().path("/{id}")
+                .buildAndExpand(createdPatient.getId()).toUri();
 
         return ResponseEntity.created(location).build();
     }
+
+
 }

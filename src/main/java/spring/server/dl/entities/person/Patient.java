@@ -18,6 +18,8 @@ import java.util.UUID;
 })
 public class Patient extends Person{
 
+    // Modification patient
+
     @Column(nullable = false)
     private LocalDate birthDate;
 
@@ -27,8 +29,9 @@ public class Patient extends Person{
     @Column(length = 500)
     private String info_supplement;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Address address;
+
 
     public Patient(UUID id, String firstName, String lastName, LocalDate birthDate, String mutuelle, String info_supplement, Address address) {
         super(id, firstName, lastName);

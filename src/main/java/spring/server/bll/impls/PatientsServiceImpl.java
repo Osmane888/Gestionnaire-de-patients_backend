@@ -32,10 +32,14 @@ public class PatientsServiceImpl implements PatientsService {
         return patientRepository.findByAppelation(lastName,firstName).orElseThrow();
     }
 
+    //    Ajout de createPatient et UpdatePatient par AYOUB
     @Override
     public Patient createPatient(Patient patient) {
-        if(patientRepository.existsByAppelation(patient.getFirstName(), patient.getLastName())) {
+        if(patientRepository.existsByAppelation(patient.getLastName(), patient.getFirstName())) {
             throw new IllegalArgumentException("Le patient existe déjà");
+        }
+        if (patient.getAddress() == null) {
+            throw new IllegalArgumentException("Address is required.");
         }
         patient.setId(UUID.randomUUID());
 
@@ -45,16 +49,18 @@ public class PatientsServiceImpl implements PatientsService {
     @Override
     public Patient updatePatient(Patient patient) {
         Patient patientExisting = findPatientById(patient.getId());
+        if (patientExisting == null) {
+            throw new IllegalArgumentException("Patient inexistant");
+        }
+        patientExisting.setFirstName(patient.getFirstName());
+        patientExisting.setLastName(patient.getLastName());
+        patientExisting.setEmail(patient.getEmail());
+        patientExisting.setPhoneNumber(patient.getPhoneNumber());
+        patientExisting.setBirthDate(patient.getBirthDate());
+        patientExisting.setMutuelle(patient.getMutuelle());
+        patientExisting.setInfo_supplement(patient.getInfo_supplement());
+        patientExisting.setAddress(patient.getAddress());
 
-        patient.setId(UUID.randomUUID());
-        patient.setFirstName(patient.getFirstName());
-        patient.setLastName(patient.getLastName());
-        patient.setEmail(patient.getEmail());
-        patient.setPhoneNumber(patient.getPhoneNumber());
-        patient.setBirthDate(patient.getBirthDate());
-        patient.setMutuelle(patient.getMutuelle());
-        patient.setInfo_supplement(patient.getInfo_supplement());
-        patient.setAddress(patient.getAddress());
         return patientRepository.save(patientExisting);
     }
 
