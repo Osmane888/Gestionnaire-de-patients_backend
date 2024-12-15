@@ -1,4 +1,9 @@
 package spring.server.api.models.dtos;
 
-public record ProfessionalTokenDTO() {
+import spring.server.dl.entities.person.Professional;
+
+public record ProfessionalTokenDTO(
+        ProfessionalDTO professional,
+        String token
+) {
 }
