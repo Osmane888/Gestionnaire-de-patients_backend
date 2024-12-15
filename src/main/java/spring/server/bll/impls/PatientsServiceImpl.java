@@ -66,6 +66,9 @@ public class PatientsServiceImpl implements PatientsService {
 
     @Override
     public void deletePatient(Patient patient) {
-
+        if (patient == null || !patientRepository.existsById(patient.getId())) {
+            throw new IllegalArgumentException("Patient inexistant");
+        }
+        patientRepository.delete(patient);
     }
 }
