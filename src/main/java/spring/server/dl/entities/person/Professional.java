@@ -40,8 +40,8 @@ public class Professional extends Person implements UserDetails {
     @Column(nullable = false)
     private String password;
 
-    public Professional(UUID id, String firstName, String lastName, String email, String phoneNumber, String licenseNumber, Roles role, String specialization, String password) {
-        super(id, firstName, lastName, email, phoneNumber);
+    public Professional(String firstName, String lastName, String email, String phoneNumber, String licenseNumber, Roles role, String specialization, String password) {
+        super(firstName, lastName, email, phoneNumber);
         this.licenseNumber = licenseNumber;
         this.role = role;
         this.specialization = specialization;

@@ -26,6 +26,6 @@ public record RegisterForm(
 ) {
 
     public Professional toProfessional(){
-        return new Professional(UUID.randomUUID(), firstName, lastName, email, phoneNumber, licenseNumber, role, specialization, password);
+        return new Professional(firstName, lastName, email, phoneNumber, licenseNumber, role, specialization, password);
     }
 }
