@@ -3,6 +3,8 @@ package spring.server.api.controllers.security;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +24,8 @@ public class AuthController {
     private final JwtUtils jwtUtils;
 
     @PostMapping("/login")
+    @PreAuthorize("isAnonymous()")
+    @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<ProfessionalTokenDTO> login(@Valid @RequestBody LoginForm loginForm){
 
         Professional professional = authService.login(loginForm.toProfessional());
@@ -32,6 +36,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
+    @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<Void> register(@Valid @RequestBody RegisterForm registerForm){
         authService.register(registerForm.toProfessional());
         return ResponseEntity.noContent().build();
