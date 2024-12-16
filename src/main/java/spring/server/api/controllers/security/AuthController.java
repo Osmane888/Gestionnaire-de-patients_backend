@@ -36,5 +36,4 @@ public class AuthController {
         authService.register(registerForm.toProfessional());
         return ResponseEntity.noContent().build();
     }
-
 }

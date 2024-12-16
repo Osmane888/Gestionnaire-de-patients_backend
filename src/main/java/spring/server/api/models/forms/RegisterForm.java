@@ -1,6 +1,7 @@
 package spring.server.api.models.forms;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import spring.server.dl.entities.person.Professional;
 import spring.server.dl.enums.Roles;
 
@@ -17,7 +18,7 @@ public record RegisterForm(
         String phoneNumber,
         @NotBlank
         String licenseNumber,
-        @NotBlank
+        @NotNull
         Roles role,
         @NotBlank
         String specialization,
