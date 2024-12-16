@@ -61,7 +61,12 @@ public class ConsultationServiceImpl implements ConsultationService {
     }
 
     @Override
-    public void deleteConsultation(Consultation consultation){
-
+    public void deleteConsultation(Consultation consultation) {
+        if (consultation != null) {
+            consultationRepository.delete(consultation); // Supprime l'entité
+        } else {
+            throw new IllegalArgumentException("Consultation cannot be null");
+        }
     }
+
 }

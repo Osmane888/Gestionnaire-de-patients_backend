@@ -50,19 +50,6 @@ public class ConsultationController {
     }
 
 
-
-//    @PutMapping("/{id}")
-//    public ResponseEntity<Consultation> updateConsultation(@PathVariable UUID id, @RequestBody @Validated ConsultationForm form) {
-//        Consultation existingConsultation = consultationService.findConsultationById(id);
-//        if (existingConsultation == null) {
-//            return ResponseEntity.notFound().build();
-//        }
-//        Consultation updatedConsultation = form.toConsultation();
-//        updatedConsultation.setId(id);
-//        Consultation savedConsultation = consultationService.updateConsultation(updatedConsultation);
-//        return ResponseEntity.ok(savedConsultation);
-//    }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteConsultation(@PathVariable UUID id) {
         Consultation consultation = consultationService.findConsultationById(id);
