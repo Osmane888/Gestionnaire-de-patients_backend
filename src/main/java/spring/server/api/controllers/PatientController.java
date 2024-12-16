@@ -9,10 +9,12 @@ import spring.server.api.models.dtos.patientDTO.BasicInfosDTO;
 import spring.server.api.models.dtos.patientDTO.TotalInfosDTO;
 import spring.server.api.models.forms.PatientForm;
 import spring.server.bll.PatientsService;
+import spring.server.dl.entities.Consultation;
 import spring.server.dl.entities.person.Patient;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -33,15 +35,17 @@ public class PatientController {
         return ResponseEntity.ok(patients);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<TotalInfosDTO> findById(@PathVariable UUID id) {
 
+    @GetMapping("/{id}")
+    public ResponseEntity<TotalInfosDTO> findById(@PathVariable("id") UUID id) {
+        System.out.println("Recherche du patient avec l'ID : " + id);
         TotalInfosDTO dto = TotalInfosDTO.fromPatientTotalInfos(patientsService.findPatientById(id));
         return ResponseEntity.ok(dto);
     }
 
 
-//    Modification de postMapping par AYOUB
+
+    //    Modification de postMapping par AYOUB
     @PostMapping
     public ResponseEntity<Void> addPatient(@Valid @RequestBody PatientForm patientForm) {
         System.out.println("PatientForm: " + patientForm);
@@ -67,16 +71,39 @@ public class PatientController {
 
 
     // Ca marche pas
-    @GetMapping("/search")
+    @GetMapping("/search/by-name")
     public ResponseEntity<TotalInfosDTO> findByLastNameAndFirstName(
             @RequestParam String lastName,
             @RequestParam String firstName) {
 
-        Patient patient = patientsService.findPatientByLastNameAndFirstName(lastName, firstName);
-        TotalInfosDTO dto = TotalInfosDTO.fromPatientTotalInfos(patient);
+        String cleanLastName = lastName.trim().toLowerCase();
+        String cleanFirstName = firstName.trim().toLowerCase();
 
-        return ResponseEntity.ok(dto);
+        System.out.println("Requête reçue - lastName: " + cleanLastName + ", firstName: " + cleanFirstName);
+
+        return patientsService.findPatientByLastNameAndFirstName(cleanLastName, cleanFirstName)
+                .map(patient -> {
+                    System.out.println("Patient trouvé : " + patient);
+                    return TotalInfosDTO.fromPatientTotalInfos(patient);
+                })
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> {
+                    System.out.println("Aucun patient trouvé avec le nom " + cleanLastName + " et le prénom " + cleanFirstName);
+                    return ResponseEntity.notFound().build();
+                });
     }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     @DeleteMapping("/{id}")

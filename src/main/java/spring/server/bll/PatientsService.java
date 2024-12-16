@@ -3,6 +3,7 @@ package spring.server.bll;
 import spring.server.dl.entities.person.Patient;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface PatientsService {
@@ -11,7 +12,7 @@ public interface PatientsService {
 
     Patient findPatientById(UUID id);
 
-    Patient findPatientByLastNameAndFirstName(String lastName, String firstName);
+    Optional<Patient> findPatientByLastNameAndFirstName(String lastName, String firstName);
 
     Patient createPatient(Patient patient);
 

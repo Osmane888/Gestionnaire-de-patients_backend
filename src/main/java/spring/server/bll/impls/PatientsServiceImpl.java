@@ -8,6 +8,7 @@ import spring.server.dal.repositories.PatientRepository;
 import spring.server.dl.entities.person.Patient;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -28,9 +29,12 @@ public class PatientsServiceImpl implements PatientsService {
     }
 
     @Override
-    public Patient findPatientByLastNameAndFirstName(String lastName, String firstName) {
-        return patientRepository.findByAppelation(lastName,firstName).orElseThrow();
+    public Optional<Patient> findPatientByLastNameAndFirstName(String lastName, String firstName) {
+        return patientRepository.findByLastNameAndFirstName(lastName, firstName);
     }
+
+
+
 
     //    Ajout de createPatient et UpdatePatient par AYOUB
     @Override
