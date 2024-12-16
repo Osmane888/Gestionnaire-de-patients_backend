@@ -65,6 +65,20 @@ public class PatientController {
         return ResponseEntity.noContent().build();
     }
 
+
+    // Ca marche pas
+    @GetMapping("/search")
+    public ResponseEntity<TotalInfosDTO> findByLastNameAndFirstName(
+            @RequestParam String lastName,
+            @RequestParam String firstName) {
+
+        Patient patient = patientsService.findPatientByLastNameAndFirstName(lastName, firstName);
+        TotalInfosDTO dto = TotalInfosDTO.fromPatientTotalInfos(patient);
+
+        return ResponseEntity.ok(dto);
+    }
+
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePatient(@PathVariable UUID id) {
         Patient patient = patientsService.findPatientById(id);

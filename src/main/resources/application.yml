@@ -2,7 +2,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/gestion_patients
     username: postgres
-    password: Test1234=
+    password: 060900
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -12,4 +12,4 @@ spring:
       hibernate:
         format_sql: true
 server:
-  port: 8080
+  port: 8082
