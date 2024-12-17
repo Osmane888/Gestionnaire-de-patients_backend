@@ -21,6 +21,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/consultations")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:4200")
 public class ConsultationController {
 
     private final ConsultationService consultationService;

@@ -20,7 +20,7 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/patients")
-@CrossOrigin("*")
+@CrossOrigin(origins = "http://localhost:4200")
 public class PatientController {
 
     private final PatientsService patientsService;
