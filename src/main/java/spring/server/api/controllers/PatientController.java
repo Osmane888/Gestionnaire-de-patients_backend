@@ -71,8 +71,8 @@ public class PatientController {
 
 
     // Ca marche pas
-    @GetMapping("/search/by-name")
-    public ResponseEntity<TotalInfosDTO> findByLastNameAndFirstName(
+    @GetMapping("/search/by-first-name")
+    public ResponseEntity<List<TotalInfosDTO>> findByLastNameAndFirstName(
             @RequestParam String lastName,
             @RequestParam String firstName) {
 
@@ -81,18 +81,25 @@ public class PatientController {
 
         System.out.println("Requête reçue - lastName: " + cleanLastName + ", firstName: " + cleanFirstName);
 
-        return patientsService.findPatientByLastNameAndFirstName(cleanLastName, cleanFirstName)
-                .map(patient -> {
-                    System.out.println("Patient trouvé : " + patient);
-                    return TotalInfosDTO.fromPatientTotalInfos(patient);
-                })
-                .map(ResponseEntity::ok)
-                .orElseGet(() -> {
-                    System.out.println("Aucun patient trouvé avec le nom " + cleanLastName + " et le prénom " + cleanFirstName);
-                    return ResponseEntity.notFound().build();
-                });
+        List<TotalInfosDTO> resolt = patientsService.findPatientByLastNameAndFirstName(cleanLastName, cleanFirstName)
+                .stream().map(TotalInfosDTO::fromPatientTotalInfos).toList();
+        return ResponseEntity.ok(resolt);
     }
 
+    @GetMapping("/search/by-name")
+    public ResponseEntity<List<TotalInfosDTO>> findPatientByLastNameOrFirstName(
+            @RequestParam String name
+    ) {
+
+        String cleanName = name.trim().toLowerCase();
+
+
+        System.out.println("Requête reçue - lastName: " + cleanName + ", firstName: " + cleanName);
+
+        List<TotalInfosDTO> resolt = patientsService.findPatientByLastNameOrFirstName(cleanName)
+                .stream().map(TotalInfosDTO::fromPatientTotalInfos).toList();
+        return ResponseEntity.ok(resolt);
+    }
 
 
 

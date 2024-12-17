@@ -28,9 +28,15 @@ public class PatientsServiceImpl implements PatientsService {
         return patientRepository.findById(id).orElse(null);
     }
 
+
     @Override
-    public Optional<Patient> findPatientByLastNameAndFirstName(String lastName, String firstName) {
+    public List<Patient> findPatientByLastNameAndFirstName(String lastName, String firstName) {
         return patientRepository.findByLastNameAndFirstName(lastName, firstName);
+    }
+
+    @Override
+    public List<Patient> findPatientByLastNameOrFirstName(String name) {
+        return patientRepository.findByLastNameOrFirstName(name);
     }
 
 

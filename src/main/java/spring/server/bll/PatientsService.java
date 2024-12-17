@@ -12,7 +12,9 @@ public interface PatientsService {
 
     Patient findPatientById(UUID id);
 
-    Optional<Patient> findPatientByLastNameAndFirstName(String lastName, String firstName);
+    List<Patient> findPatientByLastNameAndFirstName(String lastName, String firstName);
+
+    List<Patient> findPatientByLastNameOrFirstName(String name);
 
     Patient createPatient(Patient patient);
 
