@@ -9,6 +9,8 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 public record ProfessionalDTO(
+        String firstName,
+        String lastName,
         UUID id,
         String email,
         Roles roles
@@ -16,6 +18,8 @@ public record ProfessionalDTO(
 
     public static ProfessionalDTO fromProfessional(Professional professional){
         return new ProfessionalDTO(
+                professional.getFirstName(),
+                professional.getLastName(),
                 professional.getId(),
                 professional.getEmail(),
                 professional.getRole()
