@@ -13,7 +13,7 @@ import java.util.UUID;
 @Repository
 public interface PatientRepository extends JpaRepository<Patient, UUID> {
 
-    // INVERSION LAST ET FIRST NAME, la c'est bon
+    // PAS BESOIN
     @Query("SELECT p FROM Patient p where ( :lastName is null or p.lastName ilike %:lastName% ) and ( :firstName is null or p.firstName ilike %:firstName% )")
     List<Patient> findByLastNameAndFirstName(String lastName, String firstName);
 

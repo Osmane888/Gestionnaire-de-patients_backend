@@ -21,6 +21,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/consultations")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:4200")
 public class ConsultationController {
 
     private final ConsultationService consultationService;
@@ -44,6 +45,7 @@ public class ConsultationController {
 
     @PostMapping
     public ResponseEntity<Consultation> createConsultation(@RequestBody @Validated ConsultationForm form) {
+        System.out.println("Received consultation form: " + form);
         Consultation consultation = form.toConsultation();
         Consultation savedConsultation = consultationService.createConsultation(consultation, form.patientid()); // Erreur ici
         return ResponseEntity.ok(savedConsultation);
