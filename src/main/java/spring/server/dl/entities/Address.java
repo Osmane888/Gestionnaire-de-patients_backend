@@ -2,18 +2,19 @@ package spring.server.dl.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
-import spring.server.dl.entities.person.Patient;
-import spring.server.dl.entities.person.Professional;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 @Entity
 @NoArgsConstructor
 @Getter @Setter
-@EqualsAndHashCode(callSuper = true) @ToString
-public class Address extends BaseEntity{
+@EqualsAndHashCode @ToString
+public class Address {
+
+    // Modification Adress
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     @Column(nullable = false, length = 250)
     private String street;
@@ -21,26 +22,16 @@ public class Address extends BaseEntity{
     @Column(nullable = false, length = 50)
     private String city;
 
-    @Column(nullable = false)
-    private String number;
+    @Column(nullable = false, length = 20)
+    private String streetNumber;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 10)
     private String zipCode;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Patient patient;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Consultation consultation;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Professional> professionals = new HashSet<>();
-
-    public Address(UUID id, String street, String city, String number, String zipCode) {
-        super(id);
+    public Address(String street, String city, String streetNumber, String zipCode) {
         this.street = street;
         this.city = city;
-        this.number = number;
+        this.streetNumber = streetNumber;
         this.zipCode = zipCode;
     }
 }

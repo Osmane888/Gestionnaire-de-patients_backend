@@ -37,9 +37,21 @@ public class Professional extends Person implements UserDetails {
     @Column(nullable = false, length = 120)
     private String specialization;
 
+    @Getter
     @Column(nullable = false)
     private String password;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Address> addresses = new HashSet<>();
+
+    public Professional(UUID id, String firstName, String lastName, String email, String phoneNumber, String licenseNumber, boolean valid, Roles role, String specialization, String password) {
+        super(id, firstName, lastName, email, phoneNumber);
+        this.licenseNumber = licenseNumber;
+        this.role = role;
+        this.specialization = specialization;
+        this.password = password;
+    }
+    
     public Professional(String firstName, String lastName, String email, String phoneNumber, String licenseNumber, Roles role, String specialization, String password) {
         super(firstName, lastName, email, phoneNumber);
         this.licenseNumber = licenseNumber;
@@ -48,6 +60,9 @@ public class Professional extends Person implements UserDetails {
         this.password = password;
     }
 
+    public Set<Address> getAddresses() {
+        return Set.copyOf(addresses);
+        }
     public Professional(String email, String password){
         super(email);
         this.password = password;

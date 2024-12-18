@@ -22,7 +22,7 @@ public class Consultation extends BaseEntity{
     private LocalDate dateRdv;
 
     @Column(nullable = false)
-    private Timestamp hourRdv;
+    private LocalTime hourRdv;
 
     @Column(nullable = false)
     private LocalTime durationRdv;
@@ -56,8 +56,7 @@ public class Consultation extends BaseEntity{
     private Certificat certificat;
 
 
-    public Consultation(UUID id, LocalDate dateRdv, Timestamp hourRdv, LocalTime durationRdv, StatusRdv statusRdv, String rdvType, String consigne, int annulationDelay, Address address, Patient patient, Professional professional, Facture facture, Certificat certificat) {
-        super(id);
+    public Consultation(LocalDate dateRdv, LocalTime hourRdv, LocalTime durationRdv, StatusRdv statusRdv, String rdvType, String consigne, int annulationDelay, Address address, Patient patient, Professional professional, Facture facture, Certificat certificat) {
         this.dateRdv = dateRdv;
         this.hourRdv = hourRdv;
         this.durationRdv = durationRdv;
@@ -70,5 +69,13 @@ public class Consultation extends BaseEntity{
         this.professional = professional;
         this.facture = facture;
         this.certificat = certificat;
+    }
+
+    public Consultation(LocalTime hourRdv, LocalDate dateRdv, LocalTime durationRdv, StatusRdv statusRdv, String rdvType) {
+        this.hourRdv = hourRdv;
+        this.dateRdv = dateRdv;
+        this.durationRdv = durationRdv;
+        this.statusRdv = statusRdv;
+        this.rdvType = rdvType;
     }
 }
