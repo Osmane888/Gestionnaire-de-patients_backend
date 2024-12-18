@@ -1,3 +1,4 @@
+
 package spring.server.il.configs;
 
 import org.springframework.context.annotation.Configuration;

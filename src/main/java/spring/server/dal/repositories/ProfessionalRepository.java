@@ -16,7 +16,7 @@ public interface ProfessionalRepository extends JpaRepository<Professional, UUID
 
     @Query("select p from Professional p where p.email ilike :email")
     Optional<Professional> findByEmail(String email);
-}
+
     @Query("select count(p) > 0 from Professional p WHERE p.lastName = :lastName and p.firstName = :firstName")
     boolean existsByAppelation(String lastName, String firstName);
 
