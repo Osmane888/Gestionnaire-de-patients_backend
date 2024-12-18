@@ -18,6 +18,7 @@ import spring.server.il.utils.JwtUtils;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:4200")
 public class AuthController {
 
     private final AuthService authService;
@@ -25,7 +26,6 @@ public class AuthController {
 
     @PostMapping("/login")
     @PreAuthorize("isAnonymous()")
-    @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<ProfessionalTokenDTO> login(@Valid @RequestBody LoginForm loginForm){
 
         Professional professional = authService.login(loginForm.toProfessional());
@@ -36,7 +36,6 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<Void> register(@Valid @RequestBody RegisterForm registerForm){
         authService.register(registerForm.toProfessional());
         return ResponseEntity.noContent().build();
