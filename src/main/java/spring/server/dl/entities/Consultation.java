@@ -31,7 +31,7 @@ public class Consultation extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private StatusRdv statusRdv;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 1000)
     private String rdvType;
 
     @Column()
