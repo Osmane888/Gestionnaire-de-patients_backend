@@ -78,4 +78,13 @@ public class Consultation extends BaseEntity{
         this.statusRdv = statusRdv;
         this.rdvType = rdvType;
     }
+
+    public Consultation(LocalDate dateRdv, LocalTime hourRdv, LocalTime durationRdv, StatusRdv statusRdv, String rdvType, Patient patient) {
+        this.dateRdv = dateRdv;
+        this.hourRdv = hourRdv;
+        this.durationRdv = durationRdv;
+        this.statusRdv = statusRdv;
+        this.rdvType = rdvType;
+        this.patient = patient;
+    }
 }

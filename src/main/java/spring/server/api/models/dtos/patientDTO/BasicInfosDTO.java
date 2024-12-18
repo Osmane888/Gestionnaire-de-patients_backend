@@ -11,7 +11,8 @@ public record BasicInfosDTO(
         String lastname,
         String firstname,
         String email,
-        String phoneNumber
+        String phoneNumber,
+        String fullname
 ) {
 
     public static BasicInfosDTO fromPatient(Patient patient) {
@@ -20,7 +21,8 @@ public record BasicInfosDTO(
                 patient.getLastName(),
                 patient.getFirstName(),
                 patient.getEmail(),
-                patient.getPhoneNumber()
+                patient.getPhoneNumber(),
+                patient.getLastName() + " " + patient.getFirstName()
         );
     }
 }
