@@ -58,5 +58,4 @@ public class ProfessionalController {
         return ResponseEntity.noContent().build();  // Retourne 204 sans contenu
     }
 
-
 }
