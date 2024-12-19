@@ -18,7 +18,8 @@ public record RegisterForm(
         String phoneNumber,
         @NotBlank
         String licenseNumber,
-        String role,
+        @NotNull
+        Roles role,
         @NotBlank
         String specialization,
         @NotBlank
@@ -26,6 +27,6 @@ public record RegisterForm(
 ) {
 
     public Professional toProfessional(){
-        return new Professional(firstName, lastName, email, phoneNumber, licenseNumber, Roles.PERSONNEL_ADMINISTRATIF, specialization, password);
+        return new Professional(firstName, lastName, email, phoneNumber, licenseNumber, role, specialization, password);
     }
 }
